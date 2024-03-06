@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cool To-Do List</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            margin: 20px;
+        }
+
+        #todoContainer {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        #headerImage {
+            max-width: 90%;
+            height: 300px;
+            margin-bottom: 20px;
+            border:4px solid black;
+            width: 500px;
+
+          
+           
+        }
+
+        #todoInput {
+            width: calc(100% - 20px);
+            box-sizing: border-box;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+            outline: none;
+            border-color: black;
+
+        }
+
+        #addBtn {
+            width: calc(100% - 20px);
+            box-sizing: border-box;
+            padding: 15px;
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        #todoList {
+            list-style-type: none;
+            padding: 0;
+            margin-top: 20px;
+        }
+
+        .todoItem {
+            background-color: #f8f8f8;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 16px;
+        }
+
+        .deleteBtn {
+            background-color: #e74c3c;
+            color: #fff;
+            border: none;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        #createdBy {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 14px;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div id="todoContainer">
+        <img id="headerImage" src="https://plus.unsplash.com/premium_photo-1681487867978-1b83ce2625c5?q=80&w=1780&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Stylish Header Image">
+        <h1>Cool To-Do List</h1>
+        <div>
+            <input type="text" id="todoInput" placeholder="Enter your task">
+            <button id="addBtn" onclick="addTodo()">Add</button>
+        </div>
+
+        <ul id="todoList"></ul>
+
+        <p id="createdBy">Created by Ayush Singh</p>
+    </div>
+
+    <script>
+        function addTodo() {
+            const todoInput = document.getElementById('todoInput');
+            const todoList = document.getElementById('todoList');
+
+            if (todoInput.value.trim() === '') {
+                alert('Please enter a task.');
+                return;
+            }
+
+            const todoItem = document.createElement('li');
+            todoItem.className = 'todoItem';
+
+            const taskText = document.createTextNode(todoInput.value);
+            todoItem.appendChild(taskText);
+
+            const deleteBtn = document.createElement('button');
+            deleteBtn.className = 'deleteBtn';
+            deleteBtn.innerHTML = 'Delete';
+            deleteBtn.onclick = function() {
+                todoList.removeChild(todoItem);
+            };
+
+            todoItem.appendChild(deleteBtn);
+
+            todoList.appendChild(todoItem);
+
+            // Clear the input field
+            todoInput.value = '';
+        }
+    </script>
+</body>
+</html>
